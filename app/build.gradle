@@ -33,7 +33,6 @@ android {
         }
         release {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            minifyEnabled true
 
             ndk {
                 abiFilters 'armeabi-v7a'
@@ -56,6 +55,7 @@ android {
         additionalParameters += '--set-max-idx-number=48000'
         additionalParameters += '--minimal-main-dex'
     }
+    buildToolsVersion '35.0.1'
 }
 
 repositories {

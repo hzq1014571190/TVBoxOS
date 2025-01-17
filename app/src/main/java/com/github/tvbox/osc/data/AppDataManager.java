@@ -31,15 +31,26 @@ public class AppDataManager {
     private AppDataManager() {
     }
 
+    /**
+     * 初始化AppDataManager实例
+     * 该方法确保在多线程环境下安全地初始化manager实例
+     * 使用双重检查锁定（Double-Checked Locking）模式来延迟初始化实例，
+     * 以提高性能并确保线程安全
+     */
     public static void init() {
+        // 检查manager是否尚未初始化
         if (manager == null) {
+            // 同步代码块，确保在多线程环境下安全地初始化manager
             synchronized (AppDataManager.class) {
+                // 再次检查manager是否尚未初始化，防止多线程环境下多次初始化
                 if (manager == null) {
+                    // 初始化manager实例
                     manager = new AppDataManager();
                 }
             }
         }
     }
+
 
     static final Migration MIGRATION_1_2 = new Migration(1, 2) {
         @Override
